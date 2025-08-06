@@ -1,43 +1,59 @@
+// features/profile/components/ClientInfoDisplay.tsx
+
 import type { ClientDetailsType } from "../ProfileClientTypes";
 
-
-type ClientInfoDisplayProps = {
-  client: ClientDetailsType;
-};
-
-/**
- * Component to display client-specific details.
- */
-export default function ClientInfoDisplay({ client }: ClientInfoDisplayProps) {
+export default function ClientInfoDisplay({ client }: { client: ClientDetailsType }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base-content">
-      <p className="text-md mb-1">
-        <strong className="text-accent">{client.isVerfiledOwner ? "Property Owner" : "Client"} ✅</strong>{' '}
-        {/* <span className={`badge ${client.isverfiledOwner ? 'badge-success' : 'badge-error'} badge-outline ml-1`}>
-          {client.isverfiledOwner ? 'Yes' : 'No'}
-        </span> */}
-      </p>
-      <p className="text-md mb-1">
-        <strong className="text-accent">Family Status:</strong> {client.familyStatus}
-      </p>
-      <p className="text-md mb-1">
-        <strong className="text-accent">Handicapped:</strong>{' '}
-        <span className={`badge ${client.isHandicapped ? 'badge-info' : 'badge-ghost'} badge-outline ml-1`}>
-          {client.isHandicapped ? 'Yes' : 'No'}
-        </span>
-      </p>
-      <p className="text-md mb-1">
-        <strong className="text-accent">Personal Income:</strong> {client.personalIncome?.toLocaleString('fr-FR')} €
-      </p>
-      <p className="text-md mb-1">
-        <strong className="text-accent">Household Income:</strong> {client.householdIncome?.toLocaleString('fr-FR')} €
-      </p>
-      <p className="text-md mb-1">
-        <strong className="text-accent">Priority Client:</strong>{' '}
-        <span className={`badge ${client.isPriority ? 'badge-warning' : 'badge-ghost'} badge-outline ml-1`}>
-          {client.isPriority ? 'Yes' : 'No'}
-        </span>
-      </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="card bg-base-100 shadow">
+        <div className="card-body">
+          <h3 className="card-title text-lg">Personal Status</h3>
+          <div className="divider m-0"></div>
+          <div className="space-y-4">
+            <div>
+              <p className="text-sm text-base-content/60">Family Status</p>
+              <p className="font-medium capitalize">
+                {client.familyStatus?.toLowerCase().replace('_', ' ')}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-base-content/60">Special Status</p>
+              <div className="flex gap-2 flex-wrap">
+                {client.isHandicapped && (
+                  <span className="badge badge-primary">Handicapped</span>
+                )}
+                {client.isPriority && (
+                  <span className="badge badge-secondary">Priority</span>
+                )}
+                {client.isVerifiedOwner && (
+                  <span className="badge badge-accent">Verified Owner</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="card bg-base-100 shadow">
+        <div className="card-body">
+          <h3 className="card-title text-lg">Financial Information</h3>
+          <div className="divider m-0"></div>
+          <div className="space-y-4">
+            <div>
+              <p className="text-sm text-base-content/60">Personal Income</p>
+              <p className="font-medium">
+                {client.personalIncome?.toLocaleString()} MAD/year
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-base-content/60">Household Income</p>
+              <p className="font-medium">
+                {client.householdIncome?.toLocaleString()} MAD/year
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

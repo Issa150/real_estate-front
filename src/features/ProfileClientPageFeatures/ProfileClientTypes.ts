@@ -7,7 +7,7 @@ export type FamilyStatusEnum = "CELIBATAIRE" | "MARIE" | "DIVORCE" | "VEUF" | "A
  * Defines the specific details pertaining to a client (a specialized user).
  */
 export type ClientDetailsType = {
-  isVerfiledOwner: boolean;
+  isVerifiedOwner: boolean;
   familyStatus: FamilyStatusEnum;
   isHandicapped: boolean;
   personalIncome: number;

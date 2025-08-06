@@ -25,8 +25,6 @@ export default function ProfileClientInformation() {
         queryFn: () => fetchClientProfile(userId),
         enabled: !!userId && !isNaN(userId), // Only run if userId is valid
     });
-    const dataH = data
-    console.log('💘💘💘', dataH)
 
 
     // TanStack Mutation for updating client details
@@ -63,7 +61,7 @@ export default function ProfileClientInformation() {
     }
 
     const userData: ClientDetailsType = data ?? {
-        isVerfiledOwner: false,
+        isVerifiedOwner: false,
         familyStatus: 'CELIBATAIRE',
         isHandicapped: false,
         personalIncome: 0,

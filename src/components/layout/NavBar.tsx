@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useUser } from "../../hooks/useUser";
 
 export default function NavBar() {
-  const { user, isLoading, error } = useUser();
+  const { user } = useUser();
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -52,7 +52,7 @@ export default function NavBar() {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <li><Link to={"profile/2"} className="justify-between">Profile</Link></li>
+            <li><Link to={"profile"} className="justify-between">Profile</Link></li>
             <li><a>Settings</a></li>
             <li><a>Logout</a></li>
           </ul>
