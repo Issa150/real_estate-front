@@ -1,5 +1,5 @@
+import Sidebar from "../features/ProfilePageFeatures/components/SideBar";
 import { useUserStore } from "../stores/useUserStore";
-import Sidebar from "../features/ProfileClientPageFeatures/components/SideBar";
 import { Outlet } from "react-router";
 
 
