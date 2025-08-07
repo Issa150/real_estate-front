@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 // import type { UserProfileType } from "../ProfileClientTypes";
 import ClientInfoForm from "../forms/ClientInfoForm";
-import ClientInfoDisplay from "./ClientInfoDisplay";
+import ClientInfoDisplay from "../components/ClientInfoDisplay";
 import type { ClientDetailsType } from "../ProfileClientTypes";
 import { toast } from "react-toastify";
 import { useParams } from "react-router";
@@ -9,7 +9,7 @@ import { fetchClientProfile, patchClientDetails } from "../api/ProfileClientApi"
 import { useState } from "react";
 
 
-export default function ProfileClientInformation() {
+export default function ClientInfoSection() {
     const [isEditingClient, setIsEditingClient] = useState(false);
     const { id } = useParams<{ id: string }>();
     const userId = Number(id);

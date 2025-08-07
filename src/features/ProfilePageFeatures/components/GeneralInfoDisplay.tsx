@@ -7,7 +7,7 @@ type UserInfoDisplayProps = {
 /**
  * Component to display a user's general information.
  */
-export default function UserInfoDisplay({ user }: UserInfoDisplayProps) {
+export default function GeneralInfoDisplay({ user }: UserInfoDisplayProps) {
 // export default function UserInfoDisplay( user? : UserGeneralInfoType) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base-content items-center">

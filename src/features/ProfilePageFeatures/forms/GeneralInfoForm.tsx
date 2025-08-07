@@ -14,7 +14,7 @@ type UserInfoFormProps = {
 /**
  * Form component for editing user's general information.
  */
-export default function UserInfoForm({ user, onSave, onCancel, isSaving }: UserInfoFormProps) {
+export default function GeneralInfoForm({ user, onSave, onCancel, isSaving }: UserInfoFormProps) {
   const [firstname, setFirstname] = useState(user.firstname || '');
   const [lastname, setLastname] = useState(user.lastname || '');
   const [email, setEmail] = useState(user.email || '');

@@ -1,23 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router";
 import type { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import type { UserGeneralInfoType } from "../ProfileClientTypes";
 import { fetchUserGeneralInfo, patchUserProfile } from "../api/ProfileClientApi";
-import UserInfoForm from "../forms/UserInforForm";
-import UserInfoDisplay from "./UserInfoDisplay";
-import { useUser } from "../../../hooks/useUser";
+import GeneralInfoForm from "../forms/GeneralInfoForm";
+import GeneralInfoDisplay from "../components/GeneralInfoDisplay";
 import { useUserStore } from "../../../stores/useUserStore";
 
 
 
 
-export default function ProfilePersonalInformation() {
-  // const { isEditingUser, setIsEditingUser } = props;
+export default function GeneralInfoSection() {
   const [isEditingUser, setIsEditingUser] = useState(false);
-  // const { id } = useParams<{ id: string }>();
-  // const { user } = useUser();
   const userId = useUserStore((state) => state.id);
   const queryClient = useQueryClient();
 
@@ -42,12 +37,10 @@ export default function ProfilePersonalInformation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userProfile", userId] });
       setIsEditingUser(false); // Exit editing mode
-      toast.success("User information updated successfully! 🎉"); // Success toast with react-toastify
-    },
+      toast.success("User information updated successfully! 🎉")}, // Success toast with react-toastify
     onError: (err) => {
       console.error("Failed to update user information:", err.response?.data.message);
-      toast.error(`Failed to update user info: ${err.message || "Unknown error"} 🙁`); // Error toast with react-toastify
-    },
+      toast.error(`Failed to update user info: ${err.message || "Unknown error"} 🙁`)}, // Error toast with react-toastify
   });
 
   if (isLoading) {
@@ -86,14 +79,14 @@ export default function ProfilePersonalInformation() {
             </button>
           </div>
           {isEditingUser ? (
-            <UserInfoForm
+            <GeneralInfoForm
               user={data}
               onSave={(data) => userMutation.mutate(data)}
               onCancel={() => setIsEditingUser(false)}
               isSaving={userMutation.isPending}
             />
           ) : (
-            <UserInfoDisplay user={data} />
+            <GeneralInfoDisplay user={data} />
           )}
         </div>
       )}

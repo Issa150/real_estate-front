@@ -1,4 +1,4 @@
-export default function ProfileAgentInformation() {
+export default function AgentInfoSection() {
   return (
     <>
       ProfileAgentInformation

@@ -1,7 +1,7 @@
 import { useUserStore } from "../../../stores/useUserStore";
-import ProfileAgentInformation from "../../ProfileAgent/components/ProfileAgentInformation";
-import ProfileClientInformation from "../components/ProfileClientInformation";
-import ProfilePersonalInformation from "../components/ProfilePersonalInformation";
+import AgentInfoSection from "../sections/AgentInfoSection";
+import ClientInfoSection from "../sections/ClientInfoSection";
+import GeneralInfoSection from "../sections/GeneralInfoSection";
 
 /**
  * 
@@ -23,15 +23,14 @@ export default function PersonalInfo() {
 
   return (
     <>
-      <ProfilePersonalInformation />
+      <GeneralInfoSection />
 
       <hr className="my-10 border-gray-300 opacity-20" />
 
       {user.role === "CLIENT" ? (
-        <ProfileClientInformation />
+        <ClientInfoSection />
       ) : (
-        // Render Agent Information for AGENT role 
-        <ProfileAgentInformation />
+        <AgentInfoSection />
       )}
     </>
   );

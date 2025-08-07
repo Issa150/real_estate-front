@@ -7,13 +7,13 @@ import OfferSinglePage from './pages/OfferSinglePage'
 import ProfileLayoutPage from './pages/ProfileLayoutPage'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PersonalInfo from './features/ProfileClientPageFeatures/routes/PersonalInfo'
-import Documents from './features/ProfileClientPageFeatures/routes/Documents'
-import Security from './features/ProfileClientPageFeatures/routes/Security'
-import ManagedProperties from './features/ProfileClientPageFeatures/routes/ManagedProperties'
-import AgentRequests from './features/ProfileClientPageFeatures/routes/AgentRequests'
-import AgentDeals from './features/ProfileClientPageFeatures/routes/AgentDeals'
-import ClientInfo from './features/ProfileClientPageFeatures/routes/ClientInfo'
+import PersonalInfo from './features/ProfilePageFeatures/routes/PersonalInfo'
+import Documents from './features/ProfilePageFeatures/routes/Documents'
+import Security from './features/ProfilePageFeatures/routes/Security'
+import ManagedProperties from './features/ProfilePageFeatures/routes/ManagedProperties'
+import AgentRequests from './features/ProfilePageFeatures/routes/AgentRequests'
+import AgentDeals from './features/ProfilePageFeatures/routes/AgentDeals'
+import ClientInfo from './features/ProfilePageFeatures/routes/ClientInfo'
 
 function App() {
 
