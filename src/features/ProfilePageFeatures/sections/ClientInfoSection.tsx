@@ -4,23 +4,27 @@ import ClientInfoForm from "../forms/ClientInfoForm";
 import ClientInfoDisplay from "../components/ClientInfoDisplay";
 import type { ClientDetailsType } from "../ProfileClientTypes";
 import { toast } from "react-toastify";
-import { useParams } from "react-router";
 import { fetchClientProfile, patchClientDetails } from "../api/ProfileClientApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUserStore } from "../../../stores/useUserStore";
 
 
 export default function ClientInfoSection() {
     const [isEditingClient, setIsEditingClient] = useState(false);
-    const { id } = useParams<{ id: string }>();
-    const userId = Number(id);
+    const storedUserId = useUserStore((state) => state.id);
+    const [userId, setUserId] = useState<number>(0)
+
+    useEffect(() => {
+        if (storedUserId) {
+            setUserId(storedUserId);
+        }
+    }, [storedUserId]);
+
+
     const queryClient = useQueryClient();
 
 
-    const {
-        data,
-        isLoading,
-        error,
-    } = useQuery<ClientDetailsType>({
+    const { data, isLoading, error, } = useQuery<ClientDetailsType>({
         queryKey: ["clientProfile", userId],
         queryFn: () => fetchClientProfile(userId),
         enabled: !!userId && !isNaN(userId), // Only run if userId is valid
@@ -60,14 +64,7 @@ export default function ClientInfoSection() {
         );
     }
 
-    const userData: ClientDetailsType = data ?? {
-        isVerifiedOwner: false,
-        familyStatus: 'CELIBATAIRE',
-        isHandicapped: false,
-        personalIncome: 0,
-        householdIncome: 0,
-        isPriority: false
-    };
+
     return (
         <>
             <div className="card bg-base-200 shadow-2xl p-6 md:p-8 border-t-4 border-secondary">
@@ -76,20 +73,23 @@ export default function ClientInfoSection() {
                     <button
                         className="btn btn-outline btn-sm sm:btn-md btn-secondary"
                         onClick={() => setIsEditingClient(!isEditingClient)}
-                        disabled={clientMutation.isPending} // Disable button while saving
-                    >
+                        disabled={clientMutation.isPending}> {/* Disable button while saving*/}
                         {isEditingClient ? "Cancel" : "Modify"}
                     </button>
                 </div>
                 {isEditingClient ? (
-                    <ClientInfoForm
-                        client={userData}
-                        onSave={(data) => clientMutation.mutate(data)}
-                        onCancel={() => setIsEditingClient(false)}
-                        isSaving={clientMutation.isPending}
-                    />
+                    data && (
+                        <ClientInfoForm
+                            client={data}
+                            onSave={(data) => clientMutation.mutate(data)}
+                            onCancel={() => setIsEditingClient(false)}
+                            isSaving={clientMutation.isPending}
+                        />
+                    )
                 ) : (
-                    <ClientInfoDisplay client={userData} />
+                    data && (
+                        <ClientInfoDisplay client={data} />
+                    )
                 )}
             </div>
         </>

@@ -1,4 +1,4 @@
-type RoleEnum = "AGENT" | "CLIENT" | "MANAGER" | "SUPER_ADMIN"
+export type RoleEnum = "AGENT" | "CLIENT" | "MANAGER" | "SUPER_ADMIN"
 
 export type CurrentUserType = {
     id: number,

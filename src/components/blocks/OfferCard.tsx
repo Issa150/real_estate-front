@@ -1,26 +1,27 @@
 
 import { Link } from 'react-router';
 import type { PoropertyManyItemClientType } from '../../features/OffersPageFeatures/propertyTypes';
+import { useUserStore } from '../../stores/useUserStore';
 
 // Define the expected roles for conditional rendering
 export type UserRoleType = "agent" | "client" | "guest"; // Add more roles as needed
 
 type OfferCardProps = {
     item: PoropertyManyItemClientType;
-    userRole: UserRoleType; // The role prop to conditionally render owner info
+    // userRole: UserRoleType; // The role prop to conditionally render owner info
 };
 
 /**
  * Renders a single property offer card.
  * Conditionally displays owner information if the userRole is 'agent'.
  */
-export default function OfferCard({ item, userRole }: OfferCardProps) {
+export default function OfferCard({ item }: OfferCardProps) {
     const imageSrc =
         item.images && item.images.length > 0 && item.images[0].url
             ? item.images[0].url
             : "/images/placeholders/default-property.webp";
 
-    const isAgent = userRole === "agent";
+    const {role} = useUserStore()
 
     return (
         <Link to={`/offers/${item.id}`} className="card bg-base-100 shadow-xl hover:scale-[1.02] transition-transform duration-300 overflow-hidden">
@@ -44,7 +45,7 @@ export default function OfferCard({ item, userRole }: OfferCardProps) {
                 <p className="text-lg font-bold text-secondary">{item.price.toLocaleString('fr-FR')} €</p>
 
                 {/* Conditional Rendering for Agent Role */}
-                {isAgent && item.owner && (
+                {role === "AGENT" && item.owner && (
                     <div className="flex items-center gap-3 mt-4 pt-3 border-t border-base-200">
                         <div className="avatar">
                             <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-300">

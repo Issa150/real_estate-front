@@ -5,7 +5,7 @@ UserGeneralInfoType} from "../ProfileClientTypes";
 
 
 export async function fetchUserGeneralInfo(id: number): Promise<UserGeneralInfoType> {
-    const response = await api.get<UserGeneralInfoType>(`/users/info/${id}`);
+    const response = await api.get<UserGeneralInfoType>(`users/info/${id}`);
     return response.data;
 }
 /**
@@ -14,7 +14,8 @@ export async function fetchUserGeneralInfo(id: number): Promise<UserGeneralInfoT
  * @returns A Promise that resolves to the UserProfileType.
  */
 export async function fetchClientProfile(id: number): Promise<ClientDetailsType> {
-    const response = await api.get<ClientDetailsType>(`/users/role-profile/${id}`);
+    const response = await api.get<ClientDetailsType>(`users/role-profile/${id}`);
+    
     return response.data;
 }
 

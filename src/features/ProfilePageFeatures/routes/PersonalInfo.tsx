@@ -1,5 +1,5 @@
 import { useUserStore } from "../../../stores/useUserStore";
-import AgentInfoSection from "../sections/AgentInfoSection";
+// import AgentInfoSection from "../sections/AgentInfoSection";
 import ClientInfoSection from "../sections/ClientInfoSection";
 import GeneralInfoSection from "../sections/GeneralInfoSection";
 
@@ -27,11 +27,7 @@ export default function PersonalInfo() {
 
       <hr className="my-10 border-gray-300 opacity-20" />
 
-      {user.role === "CLIENT" ? (
-        <ClientInfoSection />
-      ) : (
-        <AgentInfoSection />
-      )}
+      {user.role === "CLIENT" && <ClientInfoSection /> }
     </>
   );
 }

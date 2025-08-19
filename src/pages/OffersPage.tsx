@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFilteredOffers } from "../features/OffersPageFeatures/hooks/useFilteredOffers";
-import OfferCard, { type UserRoleType } from "../components/blocks/OfferCard";
+import OfferCard from "../components/blocks/OfferCard";
 
 export default function OffersPage() {
   const {
@@ -15,8 +15,6 @@ export default function OffersPage() {
     setMinPrice,
     setMaxPrice,
   } = useFilteredOffers();
-
-  const [userRole, setUserRole] = useState<UserRoleType>("agent");
 
   // 👉 Pagination setup
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,15 +32,7 @@ export default function OffersPage() {
   return (
     <div className="p-6 max-w-screen-xl mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-center">🏠 Available Properties</h2>
-      {/* a button to toggle role for testing */}
-      <div className="mt-8 text-center">
-        <button
-          className="btn btn-info btn-sm"
-          onClick={() => setUserRole(userRole === "agent" ? "client" : "agent")}
-        >
-          Toggle Role (Current: {userRole.toUpperCase()})
-        </button>
-      </div>
+      
 
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
@@ -90,7 +80,7 @@ export default function OffersPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentItems.map((item) => (
           // Render the OfferCard component for each item
-          <OfferCard key={item.id} item={item} userRole={userRole} />
+          <OfferCard key={item.id} item={item} /*userRole={userRole}*/ />
         ))}
       </div>
 

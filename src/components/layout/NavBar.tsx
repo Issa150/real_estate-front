@@ -1,8 +1,13 @@
 import { Link } from "react-router";
-import { useUser } from "../../hooks/useUser";
+// import { useUser } from "../../hooks/useUser";
+import { useUserStore } from "../../stores/useUserStore";
 
 export default function NavBar() {
-  const { user } = useUser();
+  // const { user } = useUser();
+  const firstname = useUserStore(state => state.firstname);
+  const lastname = useUserStore(state => state.lastname);
+  const profilePicture = useUserStore(state => state.profilePicture);
+  const role = useUserStore(state => state.role);
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -38,12 +43,12 @@ export default function NavBar() {
       {/* User profile dropdown */}
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
-          <p className="inline mr-5">{user.firstname}</p>
+          <p className="inline mr-5">{firstname}</p>
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
-                alt={`${user.firstname} ${user.lastname}'s Profile`}
-                src={`/uploads/profiles/${user.profilePicture}`} 
+                alt={`${firstname} ${lastname}'s Profile`}
+                src={`/uploads/profiles/${profilePicture}`}
                 onError={(e) => {
                   e.currentTarget.src = "/images/placeholders/profile-default.png";
                 }} />
@@ -53,6 +58,11 @@ export default function NavBar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li><Link to={"profile"} className="justify-between">Profile</Link></li>
+            {
+              role !== "CLIENT" && (
+                <li><Link to={"backoffice"} className="justify-between">BackOffice</Link></li>
+              )
+            }
             <li><a>Settings</a></li>
             <li><a>Logout</a></li>
           </ul>

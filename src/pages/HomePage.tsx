@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../hooks/axios";
 import { useUserStore } from "../stores/useUserStore";
+import type { RoleEnum } from "../types/UserType";
+import { Link, useNavigate } from "react-router";
 
 type UserTestType = {
   id: number,
   firstname: string,
-  profilePicture: string
+  profilePicture: string,
+  role: RoleEnum
 }
 export default function HomePage() {
 
@@ -35,6 +38,8 @@ export default function HomePage() {
 
 
 function UserCardTest() {
+  const navigate = useNavigate();
+
   const { data } = useQuery<UserTestType[]>({
     queryKey: ['AllUsers'],
     queryFn: () => getAllUsers()
@@ -47,6 +52,7 @@ function UserCardTest() {
   }
   return (
     <div className="grid grid-cols-1 gap-2">
+      <Link to={"/backoffice"}>Backoffice</Link>
       {
         data?.map((user, i) => (
 
@@ -54,10 +60,16 @@ function UserCardTest() {
 
             <div className="flex items-center gap-3">
               <img className="w-14 rounded-full" src={`/uploads/profiles/${user.profilePicture}`} />
-              <p>{user.firstname}</p>
+              <div className="text-left grid items">
+                <p>{user.firstname}</p>
+                <p className="text-xs bg-slate-500 text-amber-300 py-0.5 pb-1 px-3 rounded-xl">{user.role}</p>
+              </div>
             </div>
             <button
-              onClick={() => useUserStore.getState().setUser(user)}
+              onClick={() => {
+                useUserStore.getState().setUser(user)
+                navigate(`/profile`)
+              }}
               className="btn">
               Select
             </button>

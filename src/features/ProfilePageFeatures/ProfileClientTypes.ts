@@ -15,9 +15,6 @@ export type ClientDetailsType = {
   isPriority: boolean;
 };
 
-export type AgentDetailsType = {
-  
-}
 
 /**
  * Defines the complete user profile, including common user fields and nested client-specific details.

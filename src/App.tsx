@@ -14,6 +14,7 @@ import ManagedProperties from './features/ProfilePageFeatures/routes/ManagedProp
 import AgentRequests from './features/ProfilePageFeatures/routes/AgentRequests'
 import AgentDeals from './features/ProfilePageFeatures/routes/AgentDeals'
 import ClientInfo from './features/ProfilePageFeatures/routes/ClientInfo'
+import BackofficePageLayout from './pages/BackofficePageLayout'
 
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
           <Route path="/offers/:id" element={<OfferSinglePage />} />
           <Route path="/profile" element={<ProfileLayoutPage />} >
             {/* sub-rotues of profile page */}
-            <Route index  element={<PersonalInfo />} />
+            <Route index element={<PersonalInfo />} />
             <Route path="documents" element={<Documents />} />
             <Route path="security" element={<Security />} />
             <Route path="properties" element={<ManagedProperties />} />
@@ -47,6 +48,9 @@ function App() {
             <Route path="deals" element={<AgentDeals />} />
             <Route path="client-info" element={<ClientInfo />} />
           </Route>
+          <Route path="/backoffice" element={<BackofficePageLayout />} >
+          </Route>
+
 
         </Route>
       </Routes>

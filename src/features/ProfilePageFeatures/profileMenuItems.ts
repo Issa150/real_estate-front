@@ -4,6 +4,7 @@ export type MenuItem = { label: string; path: string; icon?: string };
 const sharedItems: MenuItem[] = [
   { label: 'Personal Information', path: '', icon: 'person' },
   { label: 'Documents', path: 'documents', icon: 'folder2' },
+  { label: 'Saved Properties', path: 'savedProperties', icon: 'shield-lock' },
   { label: 'Security Settings', path: 'security', icon: 'shield-lock' },
 ];
 

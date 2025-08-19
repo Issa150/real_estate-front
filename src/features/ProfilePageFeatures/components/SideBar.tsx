@@ -1,12 +1,11 @@
 // components/layout/Sidebar.tsx
-import { NavLink, useParams } from 'react-router';
+import { NavLink} from 'react-router';
 import { useUserStore } from '../../../stores/useUserStore';
 import { getProfileMenu } from '../profileMenuItems';
 // import { UserCircleIcon } from '@heroicons/react/24/outline';
 
 export default function Sidebar() {
   const { role, firstname, lastname, profilePicture } = useUserStore();
-  const { id } = useParams();
   const menu = getProfileMenu(role);
 
   return (
@@ -34,7 +33,7 @@ export default function Sidebar() {
           <li key={item.path}>
             <NavLink
               // to={`/profile/${id}/${item.path}`}
-              to={item.path === '' ? `/profile/${id}` : `${`/profile/${id}`}/${item.path}`}
+              to={item.path === '' ? `/profile` : `${`/profile`}/${item.path}`}
               end={item.path === ''} 
               className={({ isActive }) =>
                 `flex items-center ${isActive ? 'active !bg-primary !text-primary-content' : 'hover:bg-base-200'}`}>

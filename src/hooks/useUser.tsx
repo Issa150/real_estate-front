@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useUserStore } from "../stores/useUserStore";
-import { useCurrentUserQuery } from "./useCurrentUser";
+import { useLoadingUserStore } from "./useLoadingUserStore";
 
 /**
  * 
- * This Hook is implementing "useUserStore" and "useCurrentUserQuery" to initiate and get connected user
+ * ⚠️ This Hook is costum hook for use data on Page Refresh. 
+ * ⚠️⚠️ This should be used once in the app.
+ * ⚠️⚠️⚠️ This is not for accessing user.
  */
 export function useUser() {
   const user = useUserStore();
-  const { data, isLoading, error } = useCurrentUserQuery();
+  const { data, isLoading, error } = useLoadingUserStore();
 
   useEffect(() => {
     if (data) useUserStore.getState().setUser(data);
