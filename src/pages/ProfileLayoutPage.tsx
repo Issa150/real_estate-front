@@ -26,10 +26,10 @@ export default function ProfileLayoutPage() {
   return (
     <div className="container md:max-w-6xl mx-auto p-4 --md:p-8 --ppt-10">
       
-      <div className="flex min-h-screen bg-base-100">
+      <div className="flex min-h-screen ">
         <Sidebar />
 
-        <main className="flex-1 p-6 md:p-8 lg:p-10 bg-base-100">
+        <main className="flex-1 p-6 md:p-8 lg:p-10 ">
 
           <div className="max-w-6xl mx-auto">
             <div className="prose max-w-none">

@@ -3,10 +3,10 @@ export type MenuItem = { label: string; path: string; icon?: string };
 
 const agentItems: MenuItem[] = [
   { label: 'Dashboard', path: '', icon: 'person' },
-  { label: 'Property Requests', path: 'requests', icon: 'inbox' },
-  { label: 'Flags', path: 'properties', icon: 'house' },
-  { label: 'Deals & Transactions', path: 'deals', icon: 'cash-stack' },
+  { label: 'Property', path: 'property', icon: 'inbox' },
+  { label: 'Deals & Transactions', path: 'deals&transactions', icon: 'cash-stack' },
   { label: 'My Clients', path: 'clients', icon: 'people' },
+  { label: 'Flags', path: 'properties', icon: 'house' },
 ];
 
 const managerOnlyItems: MenuItem[] = [

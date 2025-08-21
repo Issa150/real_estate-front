@@ -10,7 +10,7 @@ export default function NavBar() {
   const role = useUserStore(state => state.role);
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar  shadow-sm">
       {/* Mobile menu button */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -19,7 +19,7 @@ export default function NavBar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li><Link to={"/"}>Home</Link></li>
             <li><Link to={"/buy"}>Buy</Link></li>
             <li><Link to={"rent"}>Rent</Link></li>
@@ -56,7 +56,7 @@ export default function NavBar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li><Link to={"profile"} className="justify-between">Profile</Link></li>
             {
               role !== "CLIENT" && (

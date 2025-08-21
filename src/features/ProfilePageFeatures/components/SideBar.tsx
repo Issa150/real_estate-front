@@ -9,7 +9,7 @@ export default function Sidebar() {
   const menu = getProfileMenu(role);
 
   return (
-    <div className="w-72 min-h-full bg-base-100 border-r border-base-300 --p-6">
+    <div className="w-72 min-h-full  border-r border-base-300 --p-6">
       {/* User Profile Summary */}
       <div className="grid items-center gap-4 mb-8 p-4 bg-base-200 rounded-lg">
         <div className="avatar justify-center">

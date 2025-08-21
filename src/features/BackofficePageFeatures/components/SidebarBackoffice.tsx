@@ -7,7 +7,7 @@ export default function SidebarBackoffice() {
     const menu = getBackofficeMenu(role);
   return (
     <>
-      <div className="w-72 min-h-full bg-base-100 border-r border-base-300 --p-6">
+      <div className="w-72 min-h-full  border-r border-base-300 --p-6">
 
       {/* Navigation Menu */}
       <ul className="menu gap-1">
@@ -15,7 +15,7 @@ export default function SidebarBackoffice() {
           <li key={item.path}>
             <NavLink
               // to={`/profile/${id}/${item.path}`}
-              to={item.path === '' ? `/profile` : `${`/profile`}/${item.path}`}
+              to={item.path === '' ? `/backoffice` : `${`/backoffice`}/${item.path}`}
               end={item.path === ''} 
               className={({ isActive }) =>
                 `flex items-center ${isActive ? 'active !bg-primary !text-primary-content' : 'hover:bg-base-200'}`}>

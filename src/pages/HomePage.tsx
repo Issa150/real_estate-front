@@ -51,12 +51,12 @@ function UserCardTest() {
     return (await api.get('/users')).data
   }
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <div className="grid grid-cols-1 gap-2 ">
       <Link to={"/backoffice"}>Backoffice</Link>
       {
         data?.map((user, i) => (
 
-          <div key={i} className="flex justify-between items-center border-2 p-2 rounded-2xl border-amber-100 shadow-2xl bg-gray-800">
+          <div key={i} className="flex justify-between items-center border-2 p-2 rounded-2xl border-amber-100 shadow-2xl ">
 
             <div className="flex items-center gap-3">
               <img className="w-14 rounded-full" src={`/uploads/profiles/${user.profilePicture}`} />

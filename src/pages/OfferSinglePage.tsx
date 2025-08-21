@@ -1,13 +1,11 @@
-import { useState } from "react";
+
 import { useOfferSingle } from "../features/OfferSinglePageFeatures/hooks/useOfferSingle";
 import PropertyImageSlider from "../features/OfferSinglePageFeatures/components/PropertyImageSlider";
 
 
 export default function OfferSinglePage() {
   const { data, isLoading } = useOfferSingle();
-  console.log("OfferSinglePage data:", data);
 
-  const [activeIndex, setActiveIndex] = useState(0);
 
   if (isLoading || !data) {
     return <div className="flex justify-center py-10"><span className="loading loading-spinner loading-lg"></span></div>;
@@ -24,7 +22,7 @@ export default function OfferSinglePage() {
 
 
       {/* Property Details */}
-      <div className="card bg-base-100 shadow-xl p-4">
+      <div className="card  shadow-xl p-4">
         <p><strong>Type:</strong> {data.type}</p>
         <p><strong>Status:</strong> {data.status}</p>
         <p><strong>Listing:</strong> {data.listingType}</p>

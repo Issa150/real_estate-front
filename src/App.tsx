@@ -15,6 +15,8 @@ import AgentRequests from './features/ProfilePageFeatures/routes/AgentRequests'
 import AgentDeals from './features/ProfilePageFeatures/routes/AgentDeals'
 import ClientInfo from './features/ProfilePageFeatures/routes/ClientInfo'
 import BackofficePageLayout from './pages/BackofficePageLayout'
+import Dashboared from './features/BackofficePageFeatures/routes/Dashboared'
+import EntityHolder from './features/BackofficePageFeatures/routes/EntityHolder'
 
 function App() {
 
@@ -38,6 +40,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/offers" element={<OffersPage />} />
           <Route path="/offers/:id" element={<OfferSinglePage />} />
+
           <Route path="/profile" element={<ProfileLayoutPage />} >
             {/* sub-rotues of profile page */}
             <Route index element={<PersonalInfo />} />
@@ -48,7 +51,10 @@ function App() {
             <Route path="deals" element={<AgentDeals />} />
             <Route path="client-info" element={<ClientInfo />} />
           </Route>
+
           <Route path="/backoffice" element={<BackofficePageLayout />} >
+            <Route index element={<Dashboared />} />
+            <Route path=":entity" element={<EntityHolder />} />
           </Route>
 
 

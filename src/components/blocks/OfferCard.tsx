@@ -24,7 +24,7 @@ export default function OfferCard({ item }: OfferCardProps) {
     const {role} = useUserStore()
 
     return (
-        <Link to={`/offers/${item.id}`} className="card bg-base-100 shadow-xl hover:scale-[1.02] transition-transform duration-300 overflow-hidden">
+        <Link to={`/offers/${item.id}`} className="card  shadow-xl hover:scale-[1.02] transition-transform duration-300 overflow-hidden">
             <figure className="h-48 overflow-hidden bg-gray-200">
                 <img
                     src={imageSrc}

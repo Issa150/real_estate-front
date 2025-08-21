@@ -2,7 +2,7 @@ export default function AgentInfoSection() {
   return (
     <>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="card bg-base-100 shadow">
+      <div className="card  shadow">
         <div className="card-body">
           <h3 className="card-title text-lg">Personal Status</h3>
           <div className="divider m-0"></div>
@@ -31,7 +31,7 @@ export default function AgentInfoSection() {
         </div>
       </div>
 
-      <div className="card bg-base-100 shadow">
+      <div className="card  shadow">
         <div className="card-body">
           <h3 className="card-title text-lg">Financial Information</h3>
           <div className="divider m-0"></div>
