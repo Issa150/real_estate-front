@@ -16,7 +16,8 @@ import AgentDeals from './features/ProfilePageFeatures/routes/AgentDeals'
 import ClientInfo from './features/ProfilePageFeatures/routes/ClientInfo'
 import BackofficePageLayout from './pages/BackofficePageLayout'
 import Dashboared from './features/BackofficePageFeatures/routes/Dashboared'
-import EntityHolder from './features/BackofficePageFeatures/routes/EntityHolder'
+import EntityItems from './features/BackofficePageFeatures/routes/EntityItems'
+import FormEntity from './features/BackofficePageFeatures/forms/FormEntity'
 
 function App() {
 
@@ -54,12 +55,18 @@ function App() {
 
           <Route path="/backoffice" element={<BackofficePageLayout />} >
             <Route index element={<Dashboared />} />
-            <Route path=":entity" element={<EntityHolder />} />
+
+            {/* Generic dynamic routing for ALL entities */}
+            <Route path=":entity" element={<EntityItems />} />
+            <Route path=":entity/new" element={<FormEntity mode="create" />} />
+            <Route path=":entity/edit/:id" element={<FormEntity mode="edit" />} />
+            {/* <Route path=":entity/:id" element={<EntityDetail />} /> */}
           </Route>
 
-
         </Route>
-      </Routes>
+
+
+      </Routes >
     </>
   )
 }
