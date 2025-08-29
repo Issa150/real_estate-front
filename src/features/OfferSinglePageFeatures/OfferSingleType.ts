@@ -8,7 +8,7 @@ type AgencyType = {
     address: string;
 };
 
-export type ListingTypeEnum = "SALE" | "RENT";
+export type ListingTypeEnum = "SALE" | "RENT" | undefined;
 export type RequestStatusEnum = "PENDING" | "ACCEPTED" | "REJECTED";
 
 
