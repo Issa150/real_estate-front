@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { PropertyImagesType } from "../../OffersPageFeatures/propertyTypes";
+import type { PropertyImagesType } from "../../OffersPageFeatures/PropertyCardTypes";
 
 type PropertyImageSliderProps = {
     images: PropertyImagesType[];

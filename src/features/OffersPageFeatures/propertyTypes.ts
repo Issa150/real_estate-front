@@ -7,8 +7,9 @@ export type PoropertyManyItemClientType = {
     area: number,
     listingType: ListingTypeEnum
     city: string,
-    images: PropertyImagesType[]
-    owner: OwnerType
+    images: PropertyImagesType[],
+    owner: OwnerType,
+    agentId: number,
 }
 
 

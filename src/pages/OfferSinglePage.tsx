@@ -1,6 +1,7 @@
 
 import { useOfferSingle } from "../features/OfferSinglePageFeatures/hooks/useOfferSingle";
 import PropertyImageSlider from "../features/OfferSinglePageFeatures/components/PropertyImageSlider";
+import ReserveBtn from "../components/blocks/ReserveBtn";
 
 
 export default function OfferSinglePage() {
@@ -29,6 +30,7 @@ export default function OfferSinglePage() {
         <p><strong>Rooms:</strong> {data.rooms}</p>
         <p><strong>Area:</strong> {data.area} m²</p>
         <p className="mt-2"><strong>Description:</strong> {data.description}</p>
+        <ReserveBtn propertyId={data.id} />
         {/* <p className="mt-2"><strong>Agency:</strong> {data.agency.city}, {data.agency.address}</p>  */} {/* Uncomment if agency details are needed */}
       </div>
     </div>

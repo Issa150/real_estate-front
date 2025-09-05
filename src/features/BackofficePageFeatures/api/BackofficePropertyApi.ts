@@ -2,7 +2,7 @@
 
 import  { AxiosError } from "axios";
 import api from "../../../hooks/axios";
-import type { PropertyDTO } from "../types/PropertyTypes";
+import type { OwnerListType, PropertyDTO } from "../types/PropertyTypes";
 import type { PoropertyManyItemClientType } from "../../OffersPageFeatures/propertyTypes";
 
 export async function getAllPropertiesForAnAgent(userId: number): Promise<PoropertyManyItemClientType[]> {
@@ -14,10 +14,8 @@ export async function getAllPropertiesForAnAgent(userId: number): Promise<Porope
 
 export const saveProperty = async (data: PropertyDTO): Promise<void> => {
   
-  console.log("data send:",data);
   try {
     const response = await api.post(`/properties`, data);
-    console.log("Response data back:",response);
     return response.data;
   } catch (error: unknown) {
     // console.error("Error data send:", error);
@@ -35,3 +33,13 @@ export const updateProperty = async (id: string, data: PropertyDTO): Promise<voi
   const response = await api.patch(`/properties/${id}`,data);
   return response.data;
 };
+
+export const deleteEntityById = async (entity: string, id: number): Promise<void> => {
+  const response = await api.delete(`/${entity}/${id}`);
+  return response.data;
+}
+
+export const getAllOwnersList = async (): Promise<OwnerListType[]>=> {
+  const response = await api.get(`/properties/all-owners`);
+  return response.data;
+}

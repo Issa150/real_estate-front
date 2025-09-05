@@ -1,4 +1,4 @@
-import type { PropertyImagesType } from "../OffersPageFeatures/propertyTypes";
+import type { PropertyImagesType } from "../OffersPageFeatures/PropertyCardTypes";
 
 type AgencyType = {
     id: number;
@@ -26,4 +26,10 @@ export type PropertySingleType = {
     address: string;
     agency: AgencyType;
     images: PropertyImagesType[];
+};
+
+
+export type ReservationRequestType = {
+    clientId: number;
+    propertyId: number;
 };

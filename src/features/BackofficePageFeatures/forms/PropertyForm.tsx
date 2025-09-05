@@ -1,25 +1,47 @@
 // PropertyForm.tsx
 import React from 'react';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useFormik } from 'formik';
 import { useMutation } from '@tanstack/react-query';
-import type { PropertyDTO, PropertyFormProps } from '../types/PropertyTypes';
 import type { ListingTypeEnum } from '../../OfferSinglePageFeatures/OfferSingleType';
-import { saveProperty, updateProperty } from '../api/BackofficePropertyAPi';
 import { useNavigate } from 'react-router';
+import { useUserStore } from '../../../stores/useUserStore';
+import useGetAllOwnersList from '../hooks/useGetAllOwnersList';
+import { toast } from 'react-toastify';
+import type { PropertyDTO, PropertyFormProps } from '../types/PropertyTypes';
+import { saveProperty, updateProperty } from '../api/BackofficePropertyApi';
 
 const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) => {
   const navigate = useNavigate();
+  const userId = useUserStore(state => state.id)
+  const [initialAgentId, setInitialAgentId] = React.useState<number | undefined>(undefined);
+  React.useEffect(() => {
+    if (userId) {
+      setInitialAgentId(userId);
+    }
+  }, [userId]);
+
+  const { data: ownerList } = useGetAllOwnersList()
+
   // Define the mutation function with the correct type
   const mutation = useMutation<void, Error, PropertyDTO>({
     mutationFn: mode === "create" ? saveProperty : (data: PropertyDTO) => updateProperty(id!, data),
+    onSuccess: () => {
+      toast.success(`Property ${mode === "create" ? "created" : "updated"} successfully!`);
+      // Navigate after success
+      setTimeout(() => {
+        navigate('/backoffice/property');
+      }, 2000);
+    },
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`);
+    }
   });
 
   const formik = useFormik({
     initialValues: initialData || {
-      // title: 'New Property 2',
       description: ' big house',
       price: 320000.25,
-      // type: 'T2',
       rooms: 2,
       area: 34.78,
       isAvailable: true,
@@ -28,12 +50,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
       department: 'Haut de france',
       address: 'PLace de la republic',
       ownerId: 5,
-      agentId: 2,
-      agencyId: 1,
+      agentId: initialAgentId,
     },
+    enableReinitialize: true, // important to update form values when initialAgentId changes
     onSubmit: (values) => {
       mutation.mutate(values);
-      navigate('/backoffice/properties');
+
     },
   });
 
@@ -41,17 +63,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">{mode === "create" ? "Create Property" : `Edit Property ${id}`}</h1>
       <form onSubmit={formik.handleSubmit} className="space-y-4">
-        {/* <div className="flex flex-col">
-          <label className="mb-1 text-left font-semibold">Property Title</label>
-          <input
-            type="text"
-            name="title"
-            placeholder="Property Title"
-            className="input input-bordered w-full"
-            onChange={formik.handleChange}
-            value={formik.values.title}
-          />
-        </div> */}
+
 
         <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Description</label>
@@ -75,23 +87,6 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
             value={formik.values.price}
           />
         </div>
-
-        {/* <div className="flex flex-col">
-          <label className="mb-1 text-left font-semibold">Type</label>
-          <select
-            name="type"
-            className="input input-bordered w-full"
-            onChange={formik.handleChange}
-            value={formik.values.type}>
-
-            <option value="T1">T1</option>
-            <option value="T2">T2</option>
-            <option value="T3">T3</option>
-            <option value="T4">T4</option>
-            <option value="T5">T5</option>
-            <option value="T6">T6</option>
-          </select>
-        </div> */}
 
         <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Rooms</label>
@@ -117,33 +112,16 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
           />
         </div>
 
-        {/* <div className="flex flex-col">
-          <label className="mb-1 text-left font-semibold">Status</label>
-          <input
-            type="text"
-            name="status"
-            placeholder="Status"
-            className="input input-bordered w-full"
-            onChange={formik.handleChange}
-            value={formik.values.isAvailable}
-          />
-        </div> */}
 
         <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Listing Type</label>
-          {/* <input
-            type="text"
-            name="listingType"
-            className="input input-bordered w-full"
-            onChange={formik.handleChange}
-            value={formik.values.listingType}
-          /> */}
+
           <select
             name="listingType"
             className="input input-bordered w-full"
             onChange={formik.handleChange}
             value={formik.values.listingType}>
-              
+
             <option value="RENT">Rent</option>
             <option value="SALE">Sell</option>
           </select>
@@ -186,6 +164,23 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
         </div>
 
         <div className="flex flex-col">
+          <label className="mb-1 text-left font-semibold">Owner</label>
+          <select
+            name="ownerId"
+            className="input input-bordered w-full"
+            onChange={formik.handleChange}
+            value={formik.values.ownerId}
+          >
+            <option value="" disabled>Select an owner</option>
+            {ownerList?.map(owner => (
+              <option key={owner.id} value={owner.id}>
+                {owner.firstname} {owner.lastname}
+              </option>
+            ))}
+          </select>
+          <ChevronDownIcon className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+        </div>
+        {/* <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Owner ID</label>
           <input
             type="text"
@@ -195,9 +190,9 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
             onChange={formik.handleChange}
             value={formik.values.ownerId}
           />
-        </div>
+        </div> */}
 
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Agent ID</label>
           <input
             type="text"
@@ -207,9 +202,9 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
             onChange={formik.handleChange}
             value={formik.values.agentId}
           />
-        </div>
+        </div> */}
 
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <label className="mb-1 text-left font-semibold">Agency ID</label>
           <input
             type="text"
@@ -219,12 +214,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ mode, id, initialData }) =>
             onChange={formik.handleChange}
             value={formik.values.agencyId}
           />
-        </div>
+        </div> */}
 
         <button type="submit" className="btn bg-green-600 hover:bg-green-400 w-full">
           {mode === "create" ? "Create Property" : "Update Property"}
         </button>
-        <button type='reset' onClick={()=> navigate('/backoffice/property')} className="btn btn-primary w-full">
+        <button type='reset' onClick={() => navigate('/backoffice/property')} className="btn btn-primary w-full">
           Cancel
         </button>
       </form>

@@ -18,6 +18,7 @@ import BackofficePageLayout from './pages/BackofficePageLayout'
 import Dashboared from './features/BackofficePageFeatures/routes/Dashboared'
 import EntityItems from './features/BackofficePageFeatures/routes/EntityItems'
 import FormEntity from './features/BackofficePageFeatures/forms/FormEntity'
+import EntityDelete from './features/BackofficePageFeatures/routes/EntityDelete'
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
             <Route path=":entity/new" element={<FormEntity mode="create" />} />
             <Route path=":entity/edit/:id" element={<FormEntity mode="edit" />} />
             {/* <Route path=":entity/:id" element={<EntityDetail />} /> */}
+            <Route path=":entity/delete/:id" element={<EntityDelete />} />
           </Route>
 
         </Route>
